@@ -2,6 +2,7 @@ const { Pokemon, Type, pokemons_types, Op } = require("../db");
 
 const { v4: uuidv4 } = require("uuid");
 const axios = require("axios");
+const { types } = require("pg");
 
 let pageAll;
 
@@ -143,7 +144,7 @@ async function getPokemon(req, res, next) {
           allPokemons.push(obj);
         })
       );
-
+      allPokemons = allPokemons.concat(dbPokemon);
       //#endregion
 
       //#region ORDER mejoprar el ordenamiento
@@ -198,6 +199,49 @@ async function getPokemon(req, res, next) {
     next(error);
   }
 }
+
+const addPokemon = async (req, res, next) => {
+  console.log(req.body);
+  try {
+    const { name, life, strength, defense, speed, height, weight, types } =
+      req.body;
+
+    let pokemon = {
+      name,
+      life,
+      strength,
+      defense,
+      speed,
+      height,
+      weight,
+    };
+
+    let type = {
+      name,
+    };
+    type.name = types;
+
+    const tempPokemon = await Pokemon.create(pokemon);
+    const tempType = await Type.create(type);
+    await tempPokemon.addType(tempType, { through: { selfGranted: false } });
+    const result = await Pokemon.findOne({
+      where: { name: pokemon.name },
+      include: Type,
+    });
+
+    let bar = await Type.findOne({
+      where: {
+        name: type.name,
+      },
+    });
+
+    const foo = await Pokemon.findOne({ where: { name: pokemon.name } });
+
+    res.json({ ...foo, bar });
+  } catch (error) {
+    next(error);
+  }
+};
 
 async function getPokemonById(req, res, next) {
   try {
@@ -258,4 +302,5 @@ module.exports = {
   getPokemon,
   getPokemonById,
   // preCountry,
+  addPokemon,
 };

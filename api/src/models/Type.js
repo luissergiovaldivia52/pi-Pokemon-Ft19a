@@ -7,11 +7,11 @@ const { DataTypes } = require('sequelize');
 module.exports = (sequelize) => {
     // defino el modelo
     sequelize.define('type', {
-         id: {
-                 type: DataTypes.STRING,
-                 primaryKey: true
+         //id: {
+         //        type: DataTypes.STRING,
+         //        primaryKey: true
 
-               },
+         //      },
 
         name: {
             type: DataTypes.STRING,
