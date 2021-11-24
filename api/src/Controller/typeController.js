@@ -54,7 +54,7 @@ async function getType(req, res, next) {
   }
 }
 
-const addTypes = async (req, res, next) => {
+const addType = async (req, res, next) => {
   console.log(req.body);
   try {
     const { name, dificultad, duracion, temporada, country } = req.body;
@@ -101,7 +101,7 @@ const addTypes = async (req, res, next) => {
 };
 
 module.exports = {
-  //  getActivity,
+  getType,
   //preActivity,
   addType,
 };
