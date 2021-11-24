@@ -72,50 +72,27 @@ async function getPokemon(req, res, next) {
     //#region NAME
 
     if (name && name !== "") {
-      apiPokemon = (await axios.get(`https://pokeapi.co/api/v2/pokemon/${name}`)).data //(`https://pokeapi.co/api/v2/pokemon/${name}`)
-       // .data;
-      console.log("api con name " + apiPokemon.name)
-      //apiPokemon)
+      apiPokemon = (
+        await axios.get(`https://pokeapi.co/api/v2/pokemon/${name}`)
+      ).data;
 
-      
-    //  apiPokemon = apiPokemon.results;
+      console.log("api con name " + apiPokemon.name);
 
+      let obj = { name: apiPokemon.name };
 
-    //  apiPokemon = apiPokemon.concat(apiPokemonNext);
+      obj.id = apiPokemon.id;
 
-     // dbPokemon = await Pokemon.findAll({ include: Type });
+      let arrayType = apiPokemon.types;
+      let types = [];
 
- 
+      for (let i = 0; i < arrayType.length; i++) {
+        types.push(arrayType[i].type.name);
+        obj.type = types;
+      }
 
-      // await Promise.all(
-        // apiPokemon.map(async (e) => {
-          let obj = { name: apiPokemon.name };
+      obj.imagen = apiPokemon.sprites.other.home.front_default;
 
-         // let apiAbilities = (await axios.get(e.formns.url)).data;
-          obj.id = apiPokemon.id;
-
-          let arrayType = apiPokemon.types;
-          let types = [];
-          // arrayType.map((e) => {
-          //   types.push(e.type.name);
-          //   obj.type = types;
-          // });
-          for (let i = 0; i < arrayType.length; i++) {
-           
-            types.push(arrayType[i].type.name);
-             obj.type = types;            
-          }
-
-
-          // let apiUrlForm = e.forms[0].url;
-
-          // let apiForm = (await axios.get(apiUrlForm)).data;
-
-          obj.imagen = apiPokemon.sprites.other.home.front_default;
-
-          allPokemons.push(obj);
-        // })
-      // );
+      allPokemons.push(obj);
 
       if (!apiPokemon) {
         dbPokemon = await Pokemon.findAll({
@@ -143,8 +120,6 @@ async function getPokemon(req, res, next) {
 
       dbPokemon = await Pokemon.findAll({ include: Type });
 
- 
-
       await Promise.all(
         apiPokemon.map(async (e) => {
           let obj = { name: e.name };
@@ -169,41 +144,37 @@ async function getPokemon(req, res, next) {
         })
       );
 
-   
       //#endregion
 
       //#region ORDER mejoprar el ordenamiento
 
       if (order === "lowest") {
-        if (filter === "continente") {
+        if (filter === "Pokemons") {
           allPokemons = allPokemons.sort((a, b) => {
-            return a.continents[0]
-              .toLowerCase()
-              .localeCompare(b.continents[0].toLowerCase());
+            return a.name.toLowerCase().localeCompare(b.name.toLowerCase());
           });
         }
-        if (filter === "actividad") {
+        if (filter === "Type") {
           allPokemoms = allPokemons.sort((a, b) => {
-            return a.activity
+            return a.type[0]
               .toLowerCase()
-              .localeCompare(b.activity.toLowerCase());
+              .localeCompare(b.type[0].toLowerCase());
           });
         }
       } else {
         if (order === "highest") {
-          if (filter === "continente") {
+          if (filter === "Pokemons") {
             allPokemons = allPokemons.sort((a, b) => {
-              return b.continents[0]
-                .toLowerCase()
-                .localeCompare(a.continents[0].toLowerCase());
+              return b.name.toLowerCase().localeCompare(a.name.toLowerCase());
             });
           }
+          s;
 
-          if (filter === "actividad") {
+          if (filter === "Type") {
             allPokemons = allPokemons.sort((a, b) => {
-              return b.activity
+              return b.type[0]
                 .toLowerCase()
-                .localeCompare(a.activity.toLowerCase());
+                .localeCompare(a.type[0].toLowerCase());
             });
           }
         }
@@ -288,5 +259,3 @@ module.exports = {
   getPokemonById,
   // preCountry,
 };
-
-//esto es una pruba
