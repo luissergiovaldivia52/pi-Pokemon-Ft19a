@@ -2,6 +2,7 @@ const { Pokemon, Type, pokemons_types, Op } = require("../db");
 
 const { v4: uuidv4 } = require("uuid");
 const axios = require("axios");
+const { types } = require("pg");
 
 let pageAll;
 
@@ -199,6 +200,91 @@ async function getPokemon(req, res, next) {
   }
 }
 
+//Los campos mostrados en la ruta principal
+//para cada pokemon(imagen, nombre y tipos)
+//Número de Pokemon(id)
+//Estadísticas(vida, fuerza, defensa, velocidad)
+//Altura y peso
+
+//Recibe los datos recolectados desde
+//el formulario controlado de la ruta
+//de creación de pokemons por body
+//Crea un pokemon en la base de datos
+
+
+//Pokemon con las siguientes propiedades:
+//ID(Número de Pokemon) * :
+//No puede ser un ID de un pokemon ya existente en la API pokeapi
+//Nombre *
+//Vida
+//Fuerza
+//Defensa
+//Velocidad
+//Altura
+//Peso
+
+//Tipo con las siguientes propiedades:
+//ID
+//Nombre
+
+const addPokemon = async (req, res, next) => {
+    console.log(req.body);
+    try {
+        const { name, life, strength, defense, speed, height, weight, types } = req.body;
+
+        let pokemon = {
+            name,
+            life,
+            strength,
+            defense,
+            speed,
+            height,
+            weight
+              };
+
+        let type = {
+            name,
+        };
+        type.name = types;
+
+        const tempPokemon = await Pokemon.create(pokemon);
+        const tempType = await Type.create(type);
+        await tempPokemon.addType(tempType, { through: { selfGranted: false } });
+        const result = await Pokemon.findOne({
+            where: { name: pokemon.name },
+            include: Type,
+        });
+
+
+        let bar = await Type.findOne({
+            where: {
+                name: type.name,
+            },
+        });
+        //if (bar === null) {
+        //    console.log("Not found!");
+        //    bar = await Types.create(type
+        //    );
+        //} else {
+        //    console.log(bar instanceof Types); // true
+        //    console.log(bar.name); // 'My Title'
+        //}
+
+        const foo = await Pokemon.findOne({ where: { name: pokemon.name } });
+
+        //const fooBar = await pokemons_types.create({
+        //    pokemonId: foo.id,
+        //    typeId: bar.id,
+        //});
+
+            res.json({ ...foo, bar });
+        } catch (error) {
+            next(error);
+        }
+    };
+
+
+
 async function getPokemonById(req, res, next) {
   try {
     let apiPokemon;
@@ -258,4 +344,5 @@ module.exports = {
   getPokemon,
   getPokemonById,
   // preCountry,
+  addPokemon
 };

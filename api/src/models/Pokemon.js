@@ -25,32 +25,32 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
-vida:{
+      life:{
   type: DataTypes.STRING,
  // allowNull: false,
 },
 
-fuerza:{
+      strength:{
   type: DataTypes.STRING,
   //allowNull: false,
 },
 
-defensa:{
+      defense:{
   type: DataTypes.STRING,
   //allowNull: false,
 },
 
-velocidad:{
+      speed:{
   type: DataTypes.INTEGER,
  // allowNull: false,
 },
 
-altura:{
+      height:{
   type: DataTypes.INTEGER,
   //allowNull: false,
 },
 
-peso:{
+      weight:{
   type: DataTypes.INTEGER,
  // allowNull: false,
 },
