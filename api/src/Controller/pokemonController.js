@@ -245,54 +245,93 @@ const addPokemon = async (req, res, next) => {
 
 async function getPokemonById(req, res, next) {
   try {
-    let apiPokemon;
+    let allPokemons = [];
     let dbPokemon;
     let dbType;
     let dbPokemonType;
     let allPokemonCompleted = [];
 
     const { id } = req.params;
-    let pais;
+    let pokemon;
     if (isNaN(id)) {
-      pais = await Pokemon.findByPk(id);
+      pokemon = await Pokemon.findByPk(id);
     } else {
-      pais = await axios.get(`https://restcountries.com/v3.1/alpha/${id}`);
-      pais = pais.data;
+      pokemon = await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`);
+      pokemon = pokemon.data;
     }
 
-    dbPokemon = await Pokemon.findOne({ where: { name: pais[0].name.common } });
+    console.log("api con name " + pokemon.name);
 
-    dbPokemonType = await pokemones_types.findAll({
-      where: {
-        pokemonId: {
-          // [Op.iLike]: `%${dbCountry.id}%`,
-          [Op.eq]: dbPokemon.id,
-        },
-      },
-    });
+      let obj = { name: pokemon.name };
 
-    let result = Array.isArray(dbPokemonType);
-    console.log(result);
-    let arrPokemonType = [];
-    let objType = new Object();
-    for (let i = 0; i < dbPokemonType.length; i++) {
-      const element = dbPokemonType[i].typeId;
+      obj.id = pokemon.id;
+      obj.height = pokemon.height;
+      obj.weight = pokemon.weight;
+      obj.hp = pokemon.stats[0].base_stat;
+      obj.strength = pokemon.stats[1].base_stat;
+      obj.defense = pokemon.stats[2].base_stat;
+      obj.speed = pokemon.stats[5].base_stat;
+      
 
-      arrPokemonType.push(element);
-    }
+      let arrayType = pokemon.types;
+      let types = [];
 
-    dbType = await Types.findAll({
-      where: {
-        id: arrPokemonType,
-      },
-    });
-    objType = {
-      type: dbType,
-    };
+      for (let i = 0; i < arrayType.length; i++) {
+        types.push(arrayType[i].type.name);
+        obj.type = types;
+      }
 
-    allPokemonCompleted = [...pais, objType];
+      obj.imagen = pokemon.sprites.other.home.front_default;
 
-    return res.json(allPokemonCompleted);
+      allPokemons.push(obj);
+
+      if (!pokemon) {
+        dbPokemon = await Pokemon.findAll({
+          where: {
+            name: {
+              [Op.iLike]: `%${name}%`,
+            },
+          },
+        });
+        
+      }
+        allPokemons = allPokemons.concat(dbPokemon);
+
+
+    // dbPokemon = await Pokemon.findOne({ where: { name: pokemon.name } });
+
+    // dbPokemonType = await pokemons_types.findAll({
+    //   where: {
+    //     pokemonId: {
+    //       // [Op.iLike]: `%${dbCountry.id}%`,
+    //       [Op.eq]: dbPokemon.pokemonId,
+    //     },
+    //   },
+    // });
+
+    // let result = Array.isArray(dbPokemonType);
+    // console.log(result);
+    // let arrPokemonType = [];
+    // let objType = new Object();
+    // for (let i = 0; i < dbPokemonType.length; i++) {
+    //   const element = dbPokemonType[i].typeId;
+
+    //   arrPokemonType.push(element);
+    // }
+
+    // dbType = await Types.findAll({
+    //   where: {
+    //     id: arrPokemonType,
+    //   },
+    // });
+    // objType = {
+    //   type: dbType,
+    // };
+
+    // allPokemonCompleted = [...pokemon, objType];
+
+    // return res.json(allPokemonCompleted);
+    return res.json(allPokemons)
   } catch (error) {
     next(error);
   }
