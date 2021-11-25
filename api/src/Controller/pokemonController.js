@@ -284,17 +284,17 @@ async function getPokemonById(req, res, next) {
       obj.imagen = pokemon.sprites.other.home.front_default;
 
       allPokemons.push(obj);
-
-      if (!pokemon) {
+     /* dbPokemon = await Pokemon.findAll({ include: Type });*/
+      
         dbPokemon = await Pokemon.findAll({
           where: {
             name: {
-              [Op.iLike]: `%${name}%`,
+              [Op.iLike]: `%${id}%`,
             },
           },
         });
         
-      }
+     
         allPokemons = allPokemons.concat(dbPokemon);
 
 

@@ -7,6 +7,6 @@
     "\\api\\src\\models",
     "\\api\\src\\routes"
   ],
-  "SelectedNode": "\\api\\index.js",
+  "SelectedNode": "\\api\\src\\Controller\\pokemonController.js",
   "PreviewInSolutionExplorer": false
 }
