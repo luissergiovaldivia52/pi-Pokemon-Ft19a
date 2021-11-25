@@ -144,7 +144,7 @@ async function getPokemon(req, res, next) {
           allPokemons.push(obj);
         })
       );
-
+      allPokemons = allPokemons.concat(dbPokemon);
       //#endregion
 
       //#region ORDER mejoprar el ordenamiento
@@ -200,141 +200,138 @@ async function getPokemon(req, res, next) {
   }
 }
 
-//Los campos mostrados en la ruta principal
-//para cada pokemon(imagen, nombre y tipos)
-//Número de Pokemon(id)
-//Estadísticas(vida, fuerza, defensa, velocidad)
-//Altura y peso
-
-//Recibe los datos recolectados desde
-//el formulario controlado de la ruta
-//de creación de pokemons por body
-//Crea un pokemon en la base de datos
-
-
-//Pokemon con las siguientes propiedades:
-//ID(Número de Pokemon) * :
-//No puede ser un ID de un pokemon ya existente en la API pokeapi
-//Nombre *
-//Vida
-//Fuerza
-//Defensa
-//Velocidad
-//Altura
-//Peso
-
-//Tipo con las siguientes propiedades:
-//ID
-//Nombre
-
 const addPokemon = async (req, res, next) => {
-    console.log(req.body);
-    try {
-        const { name, life, strength, defense, speed, height, weight, types } = req.body;
+  console.log(req.body);
+  try {
+    const { name, life, strength, defense, speed, height, weight, types } =
+      req.body;
 
-        let pokemon = {
-            name,
-            life,
-            strength,
-            defense,
-            speed,
-            height,
-            weight
-              };
-
-        let type = {
-            name,
-        };
-        type.name = types;
-
-        const tempPokemon = await Pokemon.create(pokemon);
-        const tempType = await Type.create(type);
-        await tempPokemon.addType(tempType, { through: { selfGranted: false } });
-        const result = await Pokemon.findOne({
-            where: { name: pokemon.name },
-            include: Type,
-        });
-
-
-        let bar = await Type.findOne({
-            where: {
-                name: type.name,
-            },
-        });
-        //if (bar === null) {
-        //    console.log("Not found!");
-        //    bar = await Types.create(type
-        //    );
-        //} else {
-        //    console.log(bar instanceof Types); // true
-        //    console.log(bar.name); // 'My Title'
-        //}
-
-        const foo = await Pokemon.findOne({ where: { name: pokemon.name } });
-
-        //const fooBar = await pokemons_types.create({
-        //    pokemonId: foo.id,
-        //    typeId: bar.id,
-        //});
-
-            res.json({ ...foo, bar });
-        } catch (error) {
-            next(error);
-        }
+    let pokemon = {
+      name,
+      life,
+      strength,
+      defense,
+      speed,
+      height,
+      weight,
     };
 
+    let type = {
+      name,
+    };
+    type.name = types;
 
+    const tempPokemon = await Pokemon.create(pokemon);
+    const tempType = await Type.create(type);
+    await tempPokemon.addType(tempType, { through: { selfGranted: false } });
+    const result = await Pokemon.findOne({
+      where: { name: pokemon.name },
+      include: Type,
+    });
+
+    let bar = await Type.findOne({
+      where: {
+        name: type.name,
+      },
+    });
+
+    const foo = await Pokemon.findOne({ where: { name: pokemon.name } });
+
+    res.json({ ...foo, bar });
+  } catch (error) {
+    next(error);
+  }
+};
 
 async function getPokemonById(req, res, next) {
   try {
-    let apiPokemon;
+    let allPokemons = [];
     let dbPokemon;
     let dbType;
     let dbPokemonType;
     let allPokemonCompleted = [];
 
     const { id } = req.params;
-    let pais;
+    let pokemon;
     if (isNaN(id)) {
-      pais = await Pokemon.findByPk(id);
+      pokemon = await Pokemon.findByPk(id);
     } else {
-      pais = await axios.get(`https://restcountries.com/v3.1/alpha/${id}`);
-      pais = pais.data;
+      pokemon = await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`);
+      pokemon = pokemon.data;
     }
 
-    dbPokemon = await Pokemon.findOne({ where: { name: pais[0].name.common } });
+    console.log("api con name " + pokemon.name);
 
-    dbPokemonType = await pokemones_types.findAll({
-      where: {
-        pokemonId: {
-          // [Op.iLike]: `%${dbCountry.id}%`,
-          [Op.eq]: dbPokemon.id,
-        },
-      },
-    });
+      let obj = { name: pokemon.name };
 
-    let result = Array.isArray(dbPokemonType);
-    console.log(result);
-    let arrPokemonType = [];
-    let objType = new Object();
-    for (let i = 0; i < dbPokemonType.length; i++) {
-      const element = dbPokemonType[i].typeId;
+      obj.id = pokemon.id;
+      obj.height = pokemon.height;
+      obj.weight = pokemon.weight;
+      obj.hp = pokemon.stats[0].base_stat;
+      obj.strength = pokemon.stats[1].base_stat;
+      obj.defense = pokemon.stats[2].base_stat;
+      obj.speed = pokemon.stats[5].base_stat;
+      
 
-      arrPokemonType.push(element);
-    }
+      let arrayType = pokemon.types;
+      let types = [];
 
-    dbType = await Types.findAll({
-      where: {
-        id: arrPokemonType,
-      },
-    });
-    objType = {
-      type: dbType,
-    };
+      for (let i = 0; i < arrayType.length; i++) {
+        types.push(arrayType[i].type.name);
+        obj.type = types;
+      }
 
-    allPokemonCompleted = [...pais, objType];
+      obj.imagen = pokemon.sprites.other.home.front_default;
 
-    return res.json(allPokemonCompleted);
+      allPokemons.push(obj);
+
+      if (!pokemon) {
+        dbPokemon = await Pokemon.findAll({
+          where: {
+            name: {
+              [Op.iLike]: `%${name}%`,
+            },
+          },
+        });
+        
+      }
+        allPokemons = allPokemons.concat(dbPokemon);
+
+
+    // dbPokemon = await Pokemon.findOne({ where: { name: pokemon.name } });
+
+    // dbPokemonType = await pokemons_types.findAll({
+    //   where: {
+    //     pokemonId: {
+    //       // [Op.iLike]: `%${dbCountry.id}%`,
+    //       [Op.eq]: dbPokemon.pokemonId,
+    //     },
+    //   },
+    // });
+
+    // let result = Array.isArray(dbPokemonType);
+    // console.log(result);
+    // let arrPokemonType = [];
+    // let objType = new Object();
+    // for (let i = 0; i < dbPokemonType.length; i++) {
+    //   const element = dbPokemonType[i].typeId;
+
+    //   arrPokemonType.push(element);
+    // }
+
+    // dbType = await Types.findAll({
+    //   where: {
+    //     id: arrPokemonType,
+    //   },
+    // });
+    // objType = {
+    //   type: dbType,
+    // };
+
+    // allPokemonCompleted = [...pokemon, objType];
+
+    // return res.json(allPokemonCompleted);
+    return res.json(allPokemons)
   } catch (error) {
     next(error);
   }
@@ -344,5 +341,7 @@ module.exports = {
   getPokemon,
   getPokemonById,
   // preCountry,
-  addPokemon
+  addPokemon,
 };
+
+//est es un nuevo intento
