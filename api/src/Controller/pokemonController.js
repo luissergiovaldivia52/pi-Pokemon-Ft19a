@@ -1,50 +1,10 @@
-const { Pokemon, Type, pokemons_types, Op } = require("../db");
+const { Pokemon, Type, Op } = require("../db");
 
 const { v4: uuidv4 } = require("uuid");
 const axios = require("axios");
 const { types } = require("pg");
 
-let pageAll;
 
-async function preCountry() {
-  try {
-    let countryApi = (await axios.get(`https://restcountries.com/v3/all`)).data;
-
-    countryApi = countryApi.map((e) => {
-      return {
-        name: e.name.common,
-        bandera: e.flags[0],
-        continente: e.continents[0],
-        capital: e.capital != undefined ? e.capital[0] : null,
-
-        subregion:
-          e.subregion != undefined && e.subregion !== "" ? e.subregion : null,
-        area: e.area,
-        poblacion: e.population,
-      };
-    });
-
-    countryApi = await Promise.all(
-      countryApi.map((e) => {
-        Countries.findOrCreate({
-          where: {
-            name: e.name,
-            bandera: e.bandera,
-            continente: e.continente,
-            capital: e.capital,
-            subregion: e.subregion,
-            area: e.area,
-            poblacion: e.poblacion,
-          }, // Buscar
-        });
-      })
-    );
-
-    return "Country cargados exitosamente";
-  } catch (error) {
-    return "No se pudo cargar los country";
-  }
-}
 
 async function getPokemon(req, res, next) {
   try {
@@ -108,8 +68,8 @@ async function getPokemon(req, res, next) {
         allPokemons = allPokemons;
       }
     } else {
-      apiPokemon = (await axios.get(`https://pokeapi.co/api/v2/pokemon`)).data;
-
+      apiPokemon = (await axios.get(`https://pokeapi.co/api/v2/pokemon`));
+      apiPokemon = apiPokemon.data
       if (paisXPage > 10 && page > 1) {
         console.log("este es el if del next ");
         apiPokemonNext = (await axios.get(apiPokemon.next)).data.results;
@@ -121,7 +81,7 @@ async function getPokemon(req, res, next) {
 
       dbPokemon = await Pokemon.findAll({ include: Type });
 
-      await Promise.all(
+    /*  await Promise.all(*/
         apiPokemon.map(async (e) => {
           let obj = { name: e.name };
 
@@ -143,7 +103,7 @@ async function getPokemon(req, res, next) {
 
           allPokemons.push(obj);
         })
-      );
+     /* );*/
       allPokemons = allPokemons.concat(dbPokemon);
       //#endregion
 
@@ -247,9 +207,7 @@ async function getPokemonById(req, res, next) {
   try {
     let allPokemons = [];
     let dbPokemon;
-    let dbType;
-    let dbPokemonType;
-    let allPokemonCompleted = [];
+ 
 
     const { id } = req.params;
     let pokemon;
@@ -284,7 +242,7 @@ async function getPokemonById(req, res, next) {
       obj.imagen = pokemon.sprites.other.home.front_default;
 
       allPokemons.push(obj);
-     /* dbPokemon = await Pokemon.findAll({ include: Type });*/
+     
       
         dbPokemon = await Pokemon.findAll({
           where: {
@@ -298,39 +256,7 @@ async function getPokemonById(req, res, next) {
         allPokemons = allPokemons.concat(dbPokemon);
 
 
-    // dbPokemon = await Pokemon.findOne({ where: { name: pokemon.name } });
-
-    // dbPokemonType = await pokemons_types.findAll({
-    //   where: {
-    //     pokemonId: {
-    //       // [Op.iLike]: `%${dbCountry.id}%`,
-    //       [Op.eq]: dbPokemon.pokemonId,
-    //     },
-    //   },
-    // });
-
-    // let result = Array.isArray(dbPokemonType);
-    // console.log(result);
-    // let arrPokemonType = [];
-    // let objType = new Object();
-    // for (let i = 0; i < dbPokemonType.length; i++) {
-    //   const element = dbPokemonType[i].typeId;
-
-    //   arrPokemonType.push(element);
-    // }
-
-    // dbType = await Types.findAll({
-    //   where: {
-    //     id: arrPokemonType,
-    //   },
-    // });
-    // objType = {
-    //   type: dbType,
-    // };
-
-    // allPokemonCompleted = [...pokemon, objType];
-
-    // return res.json(allPokemonCompleted);
+   
     return res.json(allPokemons)
   } catch (error) {
     next(error);

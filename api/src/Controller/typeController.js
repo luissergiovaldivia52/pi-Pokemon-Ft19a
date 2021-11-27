@@ -1,107 +1,73 @@
-const { Types, Pokemones, pokemones_types } = require("../db");
+const { Type, Op } = require("../db");
 const axios = require("axios");
 //const {YOUR_API_KEY, YOUR_DATE} = require ('../db')
 
-async function preActivity() {
+async function preType() {
+  let typeArray = [];
   try {
-    let activityApi = (
-      await axios.get(
-        `https://api.rawg.io/api/games?key=${YOUR_API_KEY}&dates=${YOUR_DATE}`
-      )
-    ).data.results;
+    let swap = true;
+    let paso = 0;
+    let urlPrincipal = `https://pokeapi.co/api/v2/pokemon`;
+    while (swap) {
+      swap = false;
+      let typeApi = (await axios.get(urlPrincipal)).data;
 
-    activityApi = activityApi.map((e) => {
-      return e.name;
-    });
+      let typeApiResults = typeApi.results;
+      let typeApiPrevious = typeApi.previus;
+      urlPrincipal = typeApi.next;
+      console.log("esta es la next " + urlPrincipal);
+      //url = typeApi.next;
 
-    activityApi = activyApi.map((e) => {
-      for (let i = 0; i < e.length; i++) {
-        const element = e[i];
-        return element;
-      }
-    });
+      await Promise.all(
+        await typeApiResults.map(async (e) => {
+          //  console.log(e.url);
+          let apiAbilities = await axios.get(e.url);
+          apiAbilities = apiAbilities.data;
+          // await console.log(apiAbilities);
+          let arrayType = apiAbilities.types;
+          //await console.log(arrayType);
 
-    activityApi = activityApi.map((e) => {
-      return {
-        name: e.name,
-      };
-    });
-
-    activityApi = await Promise.all(
-      // console.log("este es el promise all"),
-      activityApi.map((e) =>
-        Activity.findOrCreate({
-          where: {
-            name: e.name,
-            //slug: e.slug } // Buscar
-          },
+          arrayType.map(async (env) => {
+            await typeArray.push(env.type.name);
+            //   console.log("array de type " + typeArray)
+          });
         })
-      )
-    );
+      );
 
-    return "Genero cargados exitosamente";
+      for (let i = 0; i < typeArray.length; i++) {
+        let name = typeArray[i];
+        await Type.findOrCreate({
+          where: {
+            name: name,
+          },
+        });
+      }
+
+      if (paso < 3) {
+        swap = true;
+        paso++;
+      } else {
+        swap = false;
+      }
+    }
+
+    return "Type cargados exitosamente";
   } catch (error) {
-    return "No se pudo cargar los genero";
+    return "No se pudo cargar los type";
   }
 }
 
 async function getType(req, res, next) {
   try {
-    let type = await Types.findAll();
+    let type = await Type.findAll();
+
     res.json(type);
   } catch (error) {
     next(error);
   }
 }
 
-const addType = async (req, res, next) => {
-  console.log(req.body);
-  try {
-    const { name, dificultad, duracion, temporada, country } = req.body;
-
-    let type = {
-      name,
-      dificultad,
-      duracion,
-      temporada,
-    };
-
-    let pokemon = {
-      name,
-      bandera: "#bandera 1",
-      continente: "#continente 1",
-    };
-    pais.name = country;
-
-    let bar = await Types.findOne({
-      where: {
-        name: type.name,
-      },
-    });
-    if (bar === null) {
-      console.log("Not found!");
-        bar = await Types.create(type
-        );
-    } else {
-      console.log(bar instanceof Types); // true
-      console.log(bar.name); // 'My Title'
-    }
-
-    let foo = await Pokemones.findOne({ where: { name: pais.name } });
-
-    const fooBar = await pokemones_types.create({
-      pokemonId: foo.id,
-      typeId: bar.id,
-    });
-
-    res.json({ ...foo, bar });
-  } catch (error) {
-    next(error);
-  }
-};
-
 module.exports = {
   getType,
-  //preActivity,
-  addType,
+  preType,
 };
