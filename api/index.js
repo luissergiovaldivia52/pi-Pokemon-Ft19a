@@ -19,11 +19,14 @@
 //     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 const server = require('./src/app.js');
 const { conn } = require('./src/db.js');
+const { preType } = require('./src/controller/typeController')
 
 // Syncing all the models at once.
 conn.sync({ force: true }).then(() => {
     server.listen(3001, async () => {
-
+        console.log('%s Cargando los types...'); // eslint-disable-line no-console
+        const preload = await preType()
+        console.log('%s ' + preload)
     console.log('%s listening at 3001'); // eslint-disable-line no-console
   });
 });

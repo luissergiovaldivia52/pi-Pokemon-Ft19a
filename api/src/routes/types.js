@@ -1,9 +1,10 @@
 const { Router } = require('express');
-const { getType} = require("../Controller/typeController")
+const { getType } = require("../Controller/typeController")
 
 const router = Router();
 
 
-router.post("/" , getType) 
+router.get("/" , getType) 
+
 
 module.exports = router;
