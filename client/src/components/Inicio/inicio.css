@@ -1,0 +1,61 @@
+/* Inicio */
+#inicio {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+     background-image: url("../../img/halfcut.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+  
+  #logo {
+    width: 700px;
+    height: 300px;
+    animation-duration: 3s;
+    animation-name: logo;
+    animation-iteration-count: infinite;
+  }
+  
+  @keyframes logo {
+    50% {
+      width: 700px;
+      height: 300px;
+    }
+  
+    50% {
+      width: 600px;
+      height: 200px;
+    }
+  }
+/* Home */
+#home {
+    /* display: flex;
+    justify-content:flex-start;
+    align-items:flex-start; */
+    /* height: 100vh; */
+    /* background-image: url("../../img/claudio-luiz-castro.jpg"); */
+    /* background-size: cover; */
+    /* background-repeat: no-repeat; */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+    background-color: grey;
+}
+
+
+.order {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+    margin: 1rem;
+    border-bottom: 0.1rem #c0c0c0 solid;
+}
+
+.order div {
+    flex: 1;
+}
