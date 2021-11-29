@@ -1,6 +1,5 @@
 const { Type, Op } = require("../db");
 const axios = require("axios");
-//const {YOUR_API_KEY, YOUR_DATE} = require ('../db')
 
 async function preType() {
   let typeArray = [];
@@ -16,20 +15,16 @@ async function preType() {
       let typeApiPrevious = typeApi.previus;
       urlPrincipal = typeApi.next;
       console.log("esta es la next " + urlPrincipal);
-      //url = typeApi.next;
 
       await Promise.all(
         await typeApiResults.map(async (e) => {
-          //  console.log(e.url);
           let apiAbilities = await axios.get(e.url);
           apiAbilities = apiAbilities.data;
-          // await console.log(apiAbilities);
+
           let arrayType = apiAbilities.types;
-          //await console.log(arrayType);
 
           arrayType.map(async (env) => {
             await typeArray.push(env.type.name);
-            //   console.log("array de type " + typeArray)
           });
         })
       );
@@ -71,4 +66,3 @@ module.exports = {
   getType,
   preType,
 };
-
