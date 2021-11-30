@@ -10,9 +10,9 @@ import {BrowserRouter} from "react-router-dom"
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter> 
-  <React.StrictMode>
+    <React.StrictMode> 
     <App />
-  </React.StrictMode>
+    </React.StrictMode> 
   </BrowserRouter>
   </Provider>,
   document.getElementById('root')
@@ -22,3 +22,6 @@ ReactDOM.render(
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
+
+  {/* <React.StrictMode> */}
+{/* </React.StrictMode> */}

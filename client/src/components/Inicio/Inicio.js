@@ -11,13 +11,13 @@ class Inicio extends React.Component {
 
   render() {
     return (
-      <div>
-        <div id="inicio"></div>
-        {/* <div id="inicio"> */}
-        {/* <NavLink to="/home" > <img className="logo" src={Logo} alt="to home"/> </NavLink> */}
-        {/* </div> */}
-      </div>
-    );
+       <div>
+         <div id="inicio"></div>
+         {/* <div id="inicio">   */}
+        {/* <NavLink to="/home" > <img className="logo" src={Logo} alt="to home"/> </NavLink>, */}
+         {/* </div> */}
+       </div>
+    )
   }
 }
 

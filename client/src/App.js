@@ -1,7 +1,8 @@
 import React from "react";
+import { Route, Routes } from "react-router-dom";
 import NavBar from "./components/NavBar/NavBar";
 
-import { Route } from "react-router-dom";
+
 import Detalle from "./components/Detalle";
 import Home from "./components/Home";
 import Inicio from "./components/Inicio/Inicio";
@@ -15,12 +16,13 @@ function App() {
     <div className="App">
       <h1>Henry Pokemon</h1>
       <NavBar />
+      <Routes>
+<Route exact path="/" element={<Inicio/>} /> 
+<Route exact path="/pokemons" element={<Home/>} />
 
-<Route exact path="/" component={Inicio} />
-<Route exact path="/pokemons" component={Home} />
-
-<Route path="/pokemons/:id" component={Detalle} />
-<Route path="/type" component={Formulario} /> 
+<Route path="/pokemons/:id" element={<Detalle/>} />
+<Route path="/type" element={<Formulario/>} /> 
+</Routes>
     </div>
   );
 }
