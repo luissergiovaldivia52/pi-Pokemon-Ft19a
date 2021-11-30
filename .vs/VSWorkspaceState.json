@@ -1,12 +1,13 @@
 {
   "ExpandedNodes": [
     "",
-    "\\api",
-    "\\api\\src",
-    "\\api\\src\\Controller",
     "\\api\\src\\models",
-    "\\api\\src\\routes"
+    "\\api\\src\\routes",
+    "\\client",
+    "\\client\\src",
+    "\\client\\src\\components",
+    "\\client\\src\\components\\Card"
   ],
-  "SelectedNode": "\\api\\src\\routes\\index.js",
+  "SelectedNode": "\\client\\src\\components\\Card\\Card.css",
   "PreviewInSolutionExplorer": false
 }
