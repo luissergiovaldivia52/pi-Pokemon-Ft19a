@@ -32,12 +32,21 @@ export const getPokemon = (id)=>{
     }
 }
 
-export const getPokemons = (page, order, filter, name)=>{
-    console.log("Estoy en la action get " + name)
-    return (dispatch)=>{
-        axios.get (`http://localhost:3001/pokemons?page=${page?page:1}&order=${order?order:""}&filter=${filter?filter:""}&name=${name?name:""}`)
-        .then(pokemon =>{
-                //console.log(games)
+export const getPokemons = (page, order, filter, name) => {
+    let paisXPage = 0
+    console.log("Estoy en la action get ")
+    if (page > 1) {
+        paisXPage = 12
+    } else {
+        paisXPage = 9
+    }
+    return (dispatch) => {
+        
+        axios.get(`http://localhost:3001/pokemons?page=${page ? page : 1}&paisXPage=${paisXPage ? paisXPage : 9}&order=${order?order:""}&filter=${filter?filter:""}&name=${name?name:""}`)
+            .then(pokemon => {
+                if (page === 0) {
+                    pokemon.data = []
+                }
             return dispatch({
                 type: GET_ALL_POKEMONS,
                 payload: pokemon.data

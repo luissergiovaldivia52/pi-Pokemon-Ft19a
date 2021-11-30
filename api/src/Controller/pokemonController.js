@@ -5,6 +5,7 @@ const axios = require("axios");
 const { types } = require("pg");
 
 async function getPokemon(req, res, next) {
+  
   try {
     let { name, order, filter, page, paisXPage } = req.query;
 
@@ -35,7 +36,7 @@ async function getPokemon(req, res, next) {
 /******Aca busca por nombre                                   ***********/
 /******                                                       ***********/
 /*************************************************************************/
-
+       
 
       apiPokemon = (
         await axios.get(`https://pokeapi.co/api/v2/pokemon/${name}`)
@@ -74,8 +75,8 @@ async function getPokemon(req, res, next) {
     } else {
       //*******************************************/
       //***Esta seccion buca todos los pokemons****/
-      //*******************************************/
-
+        //*******************************************/
+        
       apiPokemon = await axios.get(`https://pokeapi.co/api/v2/pokemon`);
       apiPokemon = apiPokemon.data;
       if (paisXPage > 10 && page > 1) {

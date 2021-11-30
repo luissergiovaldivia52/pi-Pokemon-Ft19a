@@ -4,14 +4,15 @@
   } */
 
 
-  .box {
-    width: 30%;
+.box {
+    /*width: 30%;*/
+    width: 20%;
     height: 200px;
     border: 5px dashed #f7a239;
-  }
+}
   img {
-    width: 25%;
-    height: 25%;
+    width: 100%;
+    height: 50%;
     /* height: auto;*/
   } 
 
