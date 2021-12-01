@@ -22,29 +22,19 @@ class Home extends React.Component {
     this.state = {
       input: "",
 
-        menssages: "",
-        paisxPage: "",
+      menssages: "",
     };
   }
 
-    changePage = (page) => {
-        
-        this.props.setPage(page);
-        if (page > 1) {
-            this.state.paisXPage = 12;
-        }
-        console.log("este es la paisXPage " + this.state.paisXPage)
+  changePage = (page) => {
+    this.props.setPage(page);
+
     this.props.getPokemons(
       page,
       this.props.order,
       this.props.filter,
-        this.props.name,
-      
+      this.props.name
     );
-  //  this.props.getPokemons(page);
-
-      
-    
   };
 
   handleOnChange = (e) => {
@@ -71,7 +61,7 @@ class Home extends React.Component {
     return (
       <div>
         <div>
-                <Order />
+          <Order />
         </div>
         <div>
           <Search onSubmit={this.handleSubmit} />
@@ -81,7 +71,7 @@ class Home extends React.Component {
 
         <div id="home">
           <button
-            disabled={this.props.page  === 0}
+            disabled={this.props.page === 0}
             onClick={() => {
               this.changePage(this.props.page - 1);
             }}
@@ -90,8 +80,7 @@ class Home extends React.Component {
           </button>
           <label>{this.props.page}</label>
           <button
-                    disabled={ this.props.pokemons?.count <= this.props.page * 4}
-                
+            disabled={this.props.pokemons?.count <= this.props.page * 4}
             onClick={() => {
               this.changePage(this.props.page + 1);
             }}
@@ -101,14 +90,7 @@ class Home extends React.Component {
 
           {this.props.pokemons?.result?.length >= 0 &&
             this.props.pokemons.result.map((e) => {
-              return (
-                <Card
-                  image={e.imagen}
-                  name={e.name}
-                /*  continents={e.continents[0]}*/
-                  id={e.id}
-                />
-              );
+              return <Card image={e.imagen} name={e.name} id={e.id} />;
             })}
         </div>
       </div>
@@ -129,9 +111,9 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-    return {
-        getPokemons: (page, name, order, filter) =>
-            dispatch(getPokemons(page, name, order, filter)),
+  return {
+    getPokemons: (page, name, order, filter) =>
+      dispatch(getPokemons(page, name, order, filter)),
 
     setName: (name) => dispatch(setName(name)),
     setOrder: (order) => dispatch(setOrder(order)),
