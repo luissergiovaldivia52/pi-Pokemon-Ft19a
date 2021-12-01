@@ -101,7 +101,9 @@ async function getPokemon(req, res, next) {
 
           obj.id = apiAbilities.id;
           obj.imagen = apiAbilities.sprites.other.home.front_default;
+          obj.hp = apiAbilities.stats[0].base_stat;
           let arrayType = apiAbilities.types;
+         
           let types = [];
 
           arrayType.map((env) => {
@@ -118,40 +120,69 @@ async function getPokemon(req, res, next) {
       //#endregion
 
       //#region ORDER mejoprar el ordenamiento
-      console.log("antes del if");
-      if (order === "lowest") {
-        console.log("adentro del if");
-        if (filter === "Pokemons") {
-          allPokemons = allPokemons.sort((a, b) => {
-            return a.name.toLowerCase().localeCompare(b.name.toLowerCase());
-          });
-        }
-        if (filter === "Type") {
-          allPokemoms = allPokemons.sort((a, b) => {
-            return a.type[0]
-              .toLowerCase()
-              .localeCompare(b.type[0].toLowerCase());
-          });
-        }
-      } else {
-        if (order === "highest") {
-          if (filter === "Pokemons") {
-            allPokemons = allPokemons.sort((a, b) => {
-              return b.name.toLowerCase().localeCompare(a.name.toLowerCase());
-            });
-          }
-          s;
+     
+      if (order === " pokLowest") {
 
-          if (filter === "Type") {
-            allPokemons = allPokemons.sort((a, b) => {
-              return b.type[0]
-                .toLowerCase()
-                .localeCompare(a.type[0].toLowerCase());
-            });
-          }
-        }
+        allPokemons = allPokemons.sort((a, b) => {
+               return a.name.toLowerCase().localeCompare(b.name.toLowerCase());
+                   
+             });
+       
+        // if (filter === "Pokemons") {
+        //   allPokemons = allPokemons.sort((a, b) => {
+        //     return a.name.toLowerCase().localeCompare(b.name.toLowerCase());
+        //   });
+        // }
+
+        // if (filter === "Type") {
+        //   allPokemoms = allPokemons.sort((a, b) => {
+        //     return a.type[0]
+        //       .toLowerCase()
+        //       .localeCompare(b.type[0].toLowerCase());
+        //   });
+        // }
+      } else if (order === "pokHighest") {
+          allPokemons = allPokemons.sort((a, b) => {
+                 return b.name.toLowerCase().localeCompare(a.name.toLowerCase());
+               });
+
+
+       
+          // if (filter === "Pokemons") {
+          //   allPokemons = allPokemons.sort((a, b) => {
+          //     return b.name.toLowerCase().localeCompare(a.name.toLowerCase());
+          //   });
+          // }
+          
+
+          // if (filter === "Type") {
+          //   allPokemons = allPokemons.sort((a, b) => {
+          //     return b.type[0]
+          //       .toLowerCase()
+          //       .localeCompare(a.type[0].toLowerCase());
+          //   });
+          // }
+        } else if (order === "hpLowest") {
+          allPokemons = allPokemons.sort((a, b) => {
+            return (a.hp - b.hp);;
+          });
+        
+        }else if (order === "hpHighest") {
+          allPokemons = allPokemons.sort((a, b) => {
+            return (b.hp - a.hp);
+         
+        })
       }
+
     }
+
+
+
+
+
+
+
+    
     //#endregion
 
     //#region PAGE

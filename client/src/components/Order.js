@@ -41,8 +41,10 @@ class Order extends Component {
                     Order{" "}
                     <select name = "choiceOrder" onChange = {this.handleSelectOrder}>
                         <option value="lastest">Lastest</option>
-                        <option value="lowest">Lowest</option>
-                        <option value="highest">Highest</option>
+                        <option value="pokLowest"> Pokemon Lowest</option>
+                        <option value="pokHighest">Pokemon Highest</option>
+                        <option value="hpLowest"> Force Lowest</option>
+                        <option value="hpHighest">Force Highest</option>
                     </select>
                 </div>
                     {/* <Search/> */}
