@@ -5,14 +5,12 @@ import { getPokemon } from "../folderRedux/actions/pokemonActions";
 
 import "./Inicio/inicio.css";
 
-//  Los campos mostrados en la ruta principal para cada país
-//     (imagen de la bandera, nombre, código de país de 3 letras y continente)
-//  Código de país de 3 letras (id)
-//  Capital
-//  Subregión
-// Área (Mostrarla en km2 o millones de km2)
-//  Población
-//  Actividades turísticas con toda su información asociada
+
+// Los campos mostrados en la ruta principal 
+//para cada pokemon (imagen, nombre y tipos)
+// Número de Pokemon (id)
+// Estadísticas (vida, fuerza, defensa, velocidad)
+// Altura y peso
 
 class Detalle extends React.Component {
   constructor(props) {
@@ -32,57 +30,61 @@ class Detalle extends React.Component {
 
     //let id =params.id ;
     let id = urlElelement;
-    this.props.getPokemons(id);
+    this.props.getPokemon(id);
   }
 
   render() {
-    // const {activity} = this.props.country[1].activity
+  
     return (
       <div>
         <div id="detalle">
           {this.props.pokemon?.length >= 0 && (
             <div>
               <div>
-                <p>imagen de la bandera</p>
+                <p>imagen del Pokemon</p>
                 <img
-                  src={this.props.country[0].flags.png}
-                  alt={this.props.country[0].name.official}
+                  src={this.props.pokemon[0].imagen}
+                  alt={this.props.pokemon[0].name}
                 />
               </div>
 
               <div>
-                <p> nombre: {this.props.country[0].name.official} </p>
+                <p> nombre: {this.props.pokemon[0].name} </p>
+              </div>
+
+              
+
+              <div>
+                <p>Id del Pokemon: {this.props.pokemon[0].id}</p>
+              </div>
+              <div>
+                <p>Height : {this.props.pokemon[0].height}</p>
+              </div>
+              <div>
+                <p>Weight: {this.props.pokemon[0].weight}</p>
               </div>
 
               <div>
-                <p>código de país : {this.props.country[0].cca3}</p>
+                <p>Life: {this.props.pokemon[0].hp} </p>
               </div>
 
               <div>
-                <p>continente: {this.props.country[0].continents}</p>
+                <p>Fuerza: {this.props.pokemon[0].hp}</p>
               </div>
 
               <div>
-                <p>Capital: {this.props.country[0].capital} </p>
+                <p> Defense: {this.props.pokemon[0].defense}  </p>
               </div>
 
               <div>
-                <p>Subregión: {this.props.country[0].subregion}</p>
+                <p>Speed {this.props.pokemon[0].speed} </p>
               </div>
 
               <div>
-                <p> Área: {this.props.country[0].area} m2 </p>
-              </div>
-
-              <div>
-                <p>Población: {this.props.country[0].population} </p>
-              </div>
-
-              <div>
-                <p>Actividades turísticas: </p>
+                <p>Type: </p>
 
                 <ul className="activity">
-                  {this.props.country[1].activity.map((e) => (
+                  {this.props.pokemon[0].type.map((e) => (
                     <li>
                       <div className="divActivity">
                         <p>{e.name} </p>
