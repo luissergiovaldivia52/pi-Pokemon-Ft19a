@@ -11,6 +11,7 @@ import {
   setFilter,
 } from "../folderRedux/actions/pokemonActions";
 import Order from "./Order";
+import Filter from "./Filter"
 import Card from "./Card/Card.js";
 import "./Inicio/Inicio";
 import Search from "./Search";
@@ -62,6 +63,7 @@ class Home extends React.Component {
       <div>
         <div>
           <Order />
+          <Filter/>
         </div>
         <div>
           <Search onSubmit={this.handleSubmit} />
@@ -88,8 +90,14 @@ class Home extends React.Component {
             next
           </button>
 
-          {this.props.pokemons?.result?.length >= 0 &&
-            this.props.pokemons.result.map((e) => {
+          {this.props.pokemons?.result?.length  >= 0 && ( !this.props.pokemon?.length != 0
+              &&  this.props.pokemons.result.map((e) => {
+                  return <Card image={e.imagen} name={e.name} id={e.id} />;
+                })
+          )
+          }
+             {this.props.pokemon?.length >= 0 &&
+            this.props.pokemon.map((e) => {
               return <Card image={e.imagen} name={e.name} id={e.id} />;
             })}
         </div>
@@ -102,7 +110,7 @@ function mapStateToProps(state) {
   return {
     pokemons: state.pokemons,
     name: state.name,
-
+    pokemon:state.pokemon,
     page: state.page,
     order: state.order,
 
@@ -117,7 +125,7 @@ function mapDispatchToProps(dispatch) {
 
     setName: (name) => dispatch(setName(name)),
     setOrder: (order) => dispatch(setOrder(order)),
-    setFilter: (filter) => dispatch(setFilter(filter)),
+    //setFilter: (filter) => dispatch(setFilter(filter)),
     setPage: (page) => dispatch(setPage(page)),
   };
 }

@@ -128,19 +128,7 @@ async function getPokemon(req, res, next) {
                    
              });
        
-        // if (filter === "Pokemons") {
-        //   allPokemons = allPokemons.sort((a, b) => {
-        //     return a.name.toLowerCase().localeCompare(b.name.toLowerCase());
-        //   });
-        // }
-
-        // if (filter === "Type") {
-        //   allPokemoms = allPokemons.sort((a, b) => {
-        //     return a.type[0]
-        //       .toLowerCase()
-        //       .localeCompare(b.type[0].toLowerCase());
-        //   });
-        // }
+      
       } else if (order === "pokHighest") {
           allPokemons = allPokemons.sort((a, b) => {
                  return b.name.toLowerCase().localeCompare(a.name.toLowerCase());
@@ -173,6 +161,25 @@ async function getPokemon(req, res, next) {
          
         })
       }
+
+          if (filter === "api") {
+          allPokemons = allPokemons.sort((a, b) => {
+            return a.name.toLowerCase().localeCompare(b.name.toLowerCase());
+          });
+        } else if (filter === "database") {
+          allPokemoms = allPokemons.sort((a, b) => {
+            return a.type[0]
+              .toLowerCase()
+              .localeCompare(b.type[0].toLowerCase());
+          });
+        }
+
+
+
+
+
+
+
 
     }
 
