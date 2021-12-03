@@ -18,10 +18,9 @@ const initialState = {
   order: "",
   filter: "",
   page: 0,
-  size: ""
+  size: "",
 };
 
-//  export default function reducer (state = initialState, {type, payload}){
 export default function reducer(state = initialState, action) {
   if (action.type === GET_ALL_POKEMONS) {
     return {
@@ -31,7 +30,6 @@ export default function reducer(state = initialState, action) {
   }
 
   if (action.type === SET_NAME) {
-    //  console.log("sOY EL REDUCE " + action.payload)
     return {
       ...state,
       name: action.payload,
@@ -45,7 +43,6 @@ export default function reducer(state = initialState, action) {
   }
 
   if (action.type === SET_ORDER) {
-    //   console.log("estamos en el reducer: " + action.payload)
     return {
       ...state,
       order: action.payload,
@@ -53,14 +50,11 @@ export default function reducer(state = initialState, action) {
   }
 
   if (action.type === SET_FILTER) {
-    //   console.log("estamos en el reducer: " + action.payload)
-    //console.log(action.payload.pokemons.filter(x =>x.id === action.payload.filter))
     return {
       ...state,
       size: action.payload.filter,
-    // pokemons: action.payload.pokemons.filter(x =>x.type === action.payload.filter)
 
-     pokemon: action.payload.pokemon
+      pokemon: action.payload.pokemon,
     };
   }
 

@@ -15,7 +15,7 @@ import Filter from "./Filter"
 import Card from "./Card/Card.js";
 import "./Inicio/Inicio";
 import Search from "./Search";
-import Timer from "./Time";
+
 
 class Home extends React.Component {
   constructor(props) {
@@ -125,7 +125,7 @@ function mapDispatchToProps(dispatch) {
 
     setName: (name) => dispatch(setName(name)),
     setOrder: (order) => dispatch(setOrder(order)),
-    //setFilter: (filter) => dispatch(setFilter(filter)),
+  
     setPage: (page) => dispatch(setPage(page)),
   };
 }
