@@ -10,14 +10,14 @@ class Formulario extends React.Component {
   constructor(props) {
     super(props);
     this.displayData = [];
-    this.allCountry = [];
+    this.allPokemon = [];
 
     this.state = {
       name: "",
-      dificultad: "",
-      duracion: "",
-      temporada: "",
-      country: "",  
+      life: "",
+      force: "",
+      defense: "",
+      speed: "",  
 
       showdata: this.displayData,
       postVal: "",
@@ -34,15 +34,15 @@ class Formulario extends React.Component {
         <pre>{this.state.postVal}</pre>
       </div>
     );
-    this.allCountry.push(
+    this.allPokemon.push(
         this.state.postVal
     )
     this.setState({
       showdata: this.displayData,
-      country:this.allCountry,
+      pokemon:this.allPokemon,
       postVal: "",
     });
-    console.log("appendData " + this.allCountry)
+    console.log("appendData " + this.allPökemon)
   }
 
   prependData() {
@@ -51,15 +51,15 @@ class Formulario extends React.Component {
         <pre>{this.state.postVal}</pre>
       </div>
     );
-    this.allCountry.shift(
+    this.allPokemon.shift(
       this.state.postVal
   )
     this.setState({
       showdata: this.displayData,
-      country:this.allCountry,
+      pokemon:this.allPokemon,
       postVal: "",
     });
-    console.log("prependData " + this.allCountry)
+    console.log("prependData " + this.allPokemon)
   }
 
   handleChange(e) {
@@ -73,21 +73,21 @@ class Formulario extends React.Component {
     this.setState({ [e.target.name]: e.target.value });
     //e.target.value = "";
   };
-  createActivity = (e) => {
+  createPokemon = (e) => {
     e.preventDefault();
-  let array = this.state.country
-  const activity = {
+  let array = this.state.pokemon
+  const pokemon = {
     name: this.state.name,
-    dificultad: this.state.dificultad,
-    duracion: this.state.duracion,
-    temporada: this.state.temporada,
-    country: "",
+    life: this.state.life,
+    force: this.state.force,
+   // temporada: this.state.temporada,
+    pokemon: "",
   };
 
     for (let i = 0; i < array.length; i++) {
-      activity.country = array[i];
-      console.log("este es el country primero " +  this.state.country)
-      this.props.createActivity(activity);
+      pokemon.type = array[i];
+      console.log("este es el country primero " +  this.state.pokemon)
+      this.props.createPokemon(pokemon);
      
     }
    
@@ -97,11 +97,11 @@ class Formulario extends React.Component {
     e.target.reset();
          
        this.displayData = [];
-       this.allCountry = []
+       this.allPokemon = []
       
        this.setState({
         showdata: this.displayData,
-        country: this.country,
+        pokemon: this.pokemon,
         
       });
      
@@ -111,20 +111,23 @@ class Formulario extends React.Component {
   };
 
   render() {
-    //const { dog } = this.props;
+   
     return (
       <section id="cart">
-        <form onSubmit={this.createActivity}>
+        <form onSubmit={this.createPokemon}>
+
+
           {/*----------------------------------*/}
           {/* ----------name------------------ */}
           {/*----------------------------------*/}
+
           <div id="container-name">
             <div id="name">
               {/********************************/}
               {/******** label name************ */}
               {/*********************************/}
               <div id="name-label">
-                <label>Actividad</label>
+                <label>Pokemon</label>
               </div>
               {/******************************/}
               {/********* input name***********/}
@@ -139,33 +142,35 @@ class Formulario extends React.Component {
               </div>
             </div>
           </div>
+
+
           ,{/*-----------------------------------*/}
-          {/*------------ Dificultad y duracion------- */}
+          {/*------------ life y fuerza------- */}
           {/*------------------------------------*/}
-          <div id="container-dificultad-duracion">
+          <div id="container-life-fuerza">
+
+
             {/*-----------------------------------*/}
-            {/*------------ Dificultad -------------- */}
+            {/*------------ life -------------- */}
             {/*------------------------------------*/}
-
-            <div id="dificultad">
+            <div id="life">
               {/********************************/}
-              {/******** label Dificultad************ */}
+              {/******** label life************ */}
               {/*********************************/}
-              <div className="dificultad-label">
-                <label>Dificultad</label>
+              <div className="life-label">
+                <label>Life</label>
               </div>
-
               <div id="container-dificultad-max-min">
                 {/********************************/}
-                {/******** dificultad  ************ */}
+                {/******** life  ************ */}
                 {/*********************************/}
                 <div id="dificultad-maximun">
                   {/*******************************************/}
-                  {/******** input dificultad************ */}
+                  {/******** input life************ */}
                   {/********************************************/}
-                  <div id="dificultad-input">
+                  <div id="life-input">
                     <input
-                      name="dificultad"
+                      name="life"
                       type="Text"
                       required
                       onChange={this.handleInput}
@@ -174,32 +179,75 @@ class Formulario extends React.Component {
                 </div>
               </div>
             </div>
+
             {/*-----------------------------------*/}
-            {/*------------  duracion------- */}
+            {/*------------  force   ------------ */}
             {/*------------------------------------*/}
-            <div id="duracion">
+            <div id="force">
               {/********************************/}
-              {/******** label duracion************ */}
+              {/******** label force************ */}
               {/*********************************/}
-              <div className="duracion-label">
-                <label>duracion</label>
+              <div className="force-label">
+                <label>Force</label>
+              </div>
+              <div id="container-force">
+                  {/*******************************************/}
+                  {/******** input force**************/}
+                  {/*******************************************/}
+                  <div id="defense-input">
+                    <input
+                      name="force"
+                      type="Text"
+                      required
+                      onChange={this.handleInput}
+                    ></input>
+                  </div>
+                </div>
+
+              {/*-----------------------------------*/}
+            {/*------------  defense   ------------ */}
+            {/*------------------------------------*/}
+            <div id="defense">
+              {/********************************/}
+              {/******** label defense************ */}
+              {/*********************************/}
+              
+              <div className="defense-label">
+                <label>Defense</label>
+              </div>
+                <div id="defense">
+                  {/*******************************************/}
+                  {/******** input defense  ********************/}
+                  {/*******************************************/}
+                  <div id="defense-input">
+                    <input
+                      name="defense"
+                      type="Text"
+                      required
+                      onChange={this.handleInput}
+                    ></input>
+                  </div>
+                </div>
               </div>
 
-              <div id="container-duracion">
-                {/********************************/}
-                {/******** date ************ */}
-                {/*********************************/}
-                <div id="duracion">
-                  {/********************************/}
-                  {/******** label  duracion************ */}
-                  {/*********************************/}
-
+            {/*-----------------------------------*/}
+            {/*------------  speed   ------------ */}
+            {/*------------------------------------*/}
+                <div id="speed">
+              {/********************************/}
+              {/******** label speed************ */}
+              {/*********************************/}
+              
+              <div className="speed-label">
+                <label>Speed</label>
+              </div>
+                <div id="speed">
                   {/*******************************************/}
-                  {/******** input duracion**************/}
+                  {/******** input speed**************/}
                   {/*******************************************/}
-                  <div id="duracion-input">
+                  <div id="speed-input">
                     <input
-                      name="duracion"
+                      name="speed"
                       type="Text"
                       required
                       onChange={this.handleInput}
@@ -209,21 +257,28 @@ class Formulario extends React.Component {
               </div>
             </div>
           </div>
-          <div id="container-country-temporada">
+
+
+
+
+
+
+          <div id="container-type-temporada">
             <div>
+
+           {/*---------------------------------------*/}
+              {/*-----------Type------------------ */}
               {/*---------------------------------------*/}
-              {/*-----------country------------------ */}
-              {/*---------------------------------------*/}
-              <div id="container-country">
-                <div id="country">
+              <div id="container-type">
+                <div id="type">
                   {/********************************/}
-                  {/******** label genres************ */}
+                  {/******** label type************ */}
                   {/*********************************/}
-                  <div id="country-label">
-                    <label>Country</label>
+                  <div id="type-label">
+                    <label>Type</label>
                   </div>
                   {/******************************/}
-                  {/********* input country******/}
+                  {/********* input type******/}
                   {/********************************/}
                   <div id="mainContainer">
                     <textarea
