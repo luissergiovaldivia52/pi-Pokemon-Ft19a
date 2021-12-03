@@ -21,7 +21,7 @@ class Order extends Component {
 
    }
 
-   handleSelectFilter = async (e)=>{
+   handleSelectFilterOrigen = async (e)=>{
    
     //console.log(e.target.value)
     await this.props.setFilter(e.target.value)   //({ [e.target.name]: e.target.value })
@@ -29,7 +29,14 @@ class Order extends Component {
 
 
 }
+handleSelectFilterType = async (e)=>{
+   
+    //console.log(e.target.value)
+    await this.props.setFilter(e.target.value)   //({ [e.target.name]: e.target.value })
+    await this.props.getPokemons( this.props.page,this.props.order, this.props.filter, this.props.name)
 
+
+}
 
 
     render() {
@@ -48,15 +55,27 @@ class Order extends Component {
                     </select>
                 </div>
                     {/* <Search/> */}
-                <div id="order-type">
+                */}
+                {/* <div id="order-type">
 
-                    Filter{" "}
-                    <select name = "choiceFilter" onChange = {this.handleSelectFilter}>
-                        <option value=" ">ALL</option>
-                        <option value="continente">Pokemons</option>
-                        <option value="actividad">Type</option>
-                    </select>
-                </div>
+Filter by Type{" "}
+<select name = "choiceFilterOrigen" onChange = {this.handleSelectFilterType}>
+    <option value=" ">ALL</option>
+    <option value="bug">Bug</option>
+    <option value="poison">Poison</option>
+    <option value="grass">Grass</option>
+    <option value="fire">Fire</option>
+    <option value="flying">Flying</option>
+    <option value="water">Water</option>
+    <option value="normal">Normal</option>
+    <option value="electric">Electric</option>
+    <option value="ground">Ground</option>
+    <option value="fairy">Fairy</option>
+    <option value="fighting">Fighting</option>
+    <option value="psychic">Psychic</option>
+    <option value="rock">Rock</option>
+</select>
+</div> */}
             </div>
         )
     }

@@ -93,13 +93,41 @@ export const setOrder = (order)=>{
     }
 }
 
-export const setFilter = (filter)=>{
-  //console.log("setOrder " + order)
-    return{
-        type: SET_FILTER,
-        payload: filter
-    }
-}
+// export const setFilter = (filter)=>{
+//   //console.log("setOrder " + order)
+//     return{
+//         type: SET_FILTER,
+//         payload: filter
+//     }
+// }
+export const setFilter = (pokemons, filter)=>{
+   
+        let filtro = []
+      let  array = pokemons.result
+   for (let i = 0; i < array.length; i++) {
+       for (let j = 0; j < array[i].type.length; j++) {
+        if (array[i].type[j] ===  filter) {
+           filtro.push(array[i]);
+        
+        } 
+           
+       }
+      }
+    
+    
+      return{
+          type: SET_FILTER,
+          payload: {
+            filter: filter,
+            pokemon:filtro,
+            
+            
+                                                                        
+          }
+      }
+  }
+
+
 
 
 export const statusFilter =(status)=>{
