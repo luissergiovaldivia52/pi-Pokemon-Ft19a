@@ -30,7 +30,7 @@ module.exports = (sequelize) => {
  // allowNull: false,
 },
 
-      strength:{
+      strenght:{
   type: DataTypes.STRING,
   //allowNull: false,
 },
