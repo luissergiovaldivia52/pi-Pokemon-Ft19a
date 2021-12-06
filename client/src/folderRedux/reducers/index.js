@@ -1,6 +1,6 @@
 import {
-  GET_ALL_POKEMONS,
-  SET_NAME,
+    GET_ALL_POKEMONS,
+     SET_NAME,
   SET_ORDER,
   SET_FILTER,
   SET_PAGE,
