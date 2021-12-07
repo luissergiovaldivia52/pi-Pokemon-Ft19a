@@ -1,4 +1,9 @@
 /*Checkou-Form*/
+body {
+    background-color: #74992e;
+}
+
+
 
 #cart {
     display: flex;
@@ -16,7 +21,7 @@
     justify-content: center;
     align-items: center;
    
-    height: 100%;
+    height: 19%;
     width: 100%;
   }
   
@@ -45,9 +50,9 @@
     margin: 2px;
   }
   
-  /* Altura */
+  /* Life */
   
-  #container-height-weight {
+/*  #container-life-fuerza {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -55,9 +60,43 @@
   
     height: 100%;
     width: 100%;
-  }
+  }*/
   
-  #container-height-max-min {
+  /*#container-life-max-min {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-end;
+  
+    height: 100%;
+    width: 100%;
+  }*/
+
+#life {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    color: mediumblue;
+    font-weight: 700;
+    width: 500px;
+    height: 0px;
+    margin: 1px;
+    font-size: x-large;
+}
+
+#life-label {
+    border: 1px solid chartreuse;
+    margin: 2px;
+}
+#life-input {
+   /* border: 1px solid chartreuse;*/
+    margin: 2px;
+}
+
+/*strenght*/
+  
+  #container-fuerza-max-min {
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -67,7 +106,7 @@
     width: 100%;
   }
   
-  #height {
+  #fuerza {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -80,66 +119,18 @@
     font-size: x-large;
   }
   
-  #height-label {
-    margin: 2px;
-  }
-  #height-maximun {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-  
-    height: 100%;
-    width: 100%;
-  }
-  
-  #height-minimun {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-  
-    height: 100%;
-    width: 100%;
-  }
-  
-  /* weight */
-  
-  #container-weight-max-min {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: flex-end;
-  
-    height: 100%;
-    width: 100%;
-  }
-  
-  #weight {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    color: mediumblue;
-    font-weight: 700;
-    width: 500px;
-    height: 80px;
-    margin: 1px;
-    font-size: x-large;
-  }
-  
-  #weight-label {
+  #fuerza-label {
     border: 1px solid chartreuse;
   
     margin: 2px;
   }
-  #weight-input {
+  #fuerza-input {
     border: 1px solid chartreuse;
   
     margin: 2px;
   }
   
-  #weight-maximun {
+  #fuerza-maximun {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -149,7 +140,7 @@
     width: 100%;
   }
   
-  #weight-minimun {
+  #fuerza-minimun {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -248,7 +239,7 @@
   }
 
 #mainContainer {
-    width: 500px;
+    width: 350px;
     padding: 0px 15px 15px 15px;
     border-radius: 5px;
     font-family: arial;
@@ -270,7 +261,7 @@ textarea {
     font-weight: bold;
     padding: 12px 15px;
     color: #ffffff;
-    margin-right: 50px;
+    margin-right: 40px;
 }
 
 .errorMsg {
@@ -287,4 +278,24 @@ textarea {
     margin-top: 12px;
     background: #e5e5e5;
     padding: 1px;
+}
+
+/*strenght*/
+
+#strenght {
+    font-family: cursive;
+}
+
+
+
+#container-type{
+
+}
+
+
+#botones {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-content: space-between;
 }

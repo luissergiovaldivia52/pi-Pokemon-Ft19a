@@ -20,6 +20,9 @@ async function getPokemon(req, res, next) {
         let apiPokemonNext = [];
         let dbPokemon;
         let allPokemons = [];
+        let api = false;
+        let dataBase = false;
+        let Ambas = false;
 
         let correccion = paisXPage != 12 ? 0 : 3;
         page = page ? page : 1;
@@ -28,6 +31,16 @@ async function getPokemon(req, res, next) {
         paisXPage = Number(paisXPage);
         correccion = Number(correccion);
         page = Number(page);
+
+        if (filter === "api") {
+            api = true;
+        } else if (filter === "database") {
+            dataBase = true;
+        } else if (filter === " ") {
+            Ambas = true;
+
+        }
+
 
         //#region NAME
 
@@ -76,6 +89,24 @@ async function getPokemon(req, res, next) {
             //*******************************************/
             //***Esta seccion buca todos los pokemons****/
             //*******************************************/
+
+
+            let resultApi = !dataBase && ((!api && Ambas) || (api && !Ambas))
+            let resultDB = !api && ((!dataBase && Ambas) || (dataBase && !Ambas))
+
+            if (resultApi) {
+                console.log("Filtrado por api")
+
+            } else if (resultDB) {
+                console.log("Filtrado por db")
+
+            } else {
+                console.log("Ambas estan")
+
+            }
+
+
+
 
             apiPokemon = await axios.get(`https://pokeapi.co/api/v2/pokemon`);
             apiPokemon = apiPokemon.data;
@@ -149,17 +180,7 @@ async function getPokemon(req, res, next) {
                 })
             }
 
-            if (filter === "api") {
-                allPokemons = allPokemons.sort((a, b) => {
-                    return a.name.toLowerCase().localeCompare(b.name.toLowerCase());
-                });
-            } else if (filter === "database") {
-                allPokemoms = allPokemons.sort((a, b) => {
-                    return a.type[0]
-                        .toLowerCase()
-                        .localeCompare(b.type[0].toLowerCase());
-                });
-            }
+
 
 
 

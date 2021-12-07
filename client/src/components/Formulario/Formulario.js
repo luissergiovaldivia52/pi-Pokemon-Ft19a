@@ -80,7 +80,7 @@ class Formulario extends React.Component {
     };
     subCreatePokemon = (e) => {
         e.preventDefault();
-      //  this.estadoActual = true
+        //  this.estadoActual = true
         let array = this.state.type
         const pokemon = {
             name: this.state.name,
@@ -160,171 +160,172 @@ class Formulario extends React.Component {
                     </div>
 
 
-                    ,{/*-----------------------------------*/}
-                    {/*------------ life y fuerza------- */}
+
+
+
+
+                    {/*-----------------------------------*/}
+                    {/*------------ life -------------- */}
                     {/*------------------------------------*/}
-                    <div id="container-life-fuerza">
+                    <div id="life">
 
 
-                        {/*-----------------------------------*/}
-                        {/*------------ life -------------- */}
-                        {/*------------------------------------*/}
-                        <div id="life">
-                            {/********************************/}
-                            {/******** label life************ */}
-                            {/*********************************/}
-                            <div className="life-label">
-                                <label>Life</label>
-                            </div>
-                            <div id="container-dificultad-max-min">
-                                {/********************************/}
-                                {/******** life  ************ */}
-                                {/*********************************/}
-                                <div id="dificultad-maximun">
-                                    {/*******************************************/}
-                                    {/******** input life************ */}
-                                    {/********************************************/}
-                                    <div id="life-input">
-                                        <input
-                                            name="life"
-                                            type="Text"
-                                            required
-                                            onChange={this.handleInput}
-                                        ></input>
-                                    </div>
-                                </div>
-                            </div>
+
+
+
+
+
+
+                    </div>
+
+                    {/*-----------------------------------*/}
+                    {/*------------  strenght   ------------ */}
+                    {/*------------------------------------*/}
+                    <div id="strenght">
+                        {/********************************/}
+                        {/******** label life************ */}
+                        {/*********************************/}
+                        {/* <div className="life-label">*/}
+                        <div className="strenght-label">
+
+                            <label>Life</label>
+                        </div>
+                        {/*******************************************/}
+                        {/******** input life************ */}
+                        {/********************************************/}
+                        <div id="life-input">
+                            <input
+                                name="life"
+                                type="Text"
+                                required
+                                onChange={this.handleInput}
+                            ></input>
+                        </div>
+                        {/********************************/}
+                        {/******** label force************ */}
+                        {/*********************************/}
+                        <div className="strenght-label">
+                            <label>Strenght</label>
                         </div>
 
+                        {/*******************************************/}
+                        {/******** input force**************/}
+                        {/*******************************************/}
+                        <div id="strenght-input">
+                            <input
+                                name="strenght"
+                                type="Text"
+                                required
+                                onChange={this.handleInput}
+                            ></input>
+                        </div>
+
+
                         {/*-----------------------------------*/}
-                        {/*------------  strenght   ------------ */}
+                        {/*------------  defense   ------------ */}
                         {/*------------------------------------*/}
-                        <div id="strenght">
+                        <div id="defense">
                             {/********************************/}
-                            {/******** label force************ */}
+                            {/******** label defense************ */}
                             {/*********************************/}
-                            <div className="strenght-label">
-                                <label>Strenght</label>
+
+                            <div className="defense-label">
+                                <label>Defense</label>
                             </div>
-                            <div id="container-strenght">
+                            <div id="defense">
                                 {/*******************************************/}
-                                {/******** input force**************/}
+                                {/******** input defense  ********************/}
                                 {/*******************************************/}
-                                <div id="strenght-input">
+                                <div id="defense-input">
                                     <input
-                                        name="strenght"
+                                        name="defense"
                                         type="Text"
                                         required
                                         onChange={this.handleInput}
                                     ></input>
                                 </div>
                             </div>
+                        </div>
 
-                            {/*-----------------------------------*/}
-                            {/*------------  defense   ------------ */}
-                            {/*------------------------------------*/}
-                            <div id="defense">
-                                {/********************************/}
-                                {/******** label defense************ */}
-                                {/*********************************/}
+                        {/*-----------------------------------*/}
+                        {/*------------  speed   ------------ */}
+                        {/*------------------------------------*/}
+                        <div id="speed">
+                            {/********************************/}
+                            {/******** label speed************ */}
+                            {/*********************************/}
 
-                                <div className="defense-label">
-                                    <label>Defense</label>
-                                </div>
-                                <div id="defense">
-                                    {/*******************************************/}
-                                    {/******** input defense  ********************/}
-                                    {/*******************************************/}
-                                    <div id="defense-input">
-                                        <input
-                                            name="defense"
-                                            type="Text"
-                                            required
-                                            onChange={this.handleInput}
-                                        ></input>
-                                    </div>
-                                </div>
+                            <div className="speed-label">
+                                <label>Speed</label>
                             </div>
-
-                            {/*-----------------------------------*/}
-                            {/*------------  speed   ------------ */}
-                            {/*------------------------------------*/}
                             <div id="speed">
-                                {/********************************/}
-                                {/******** label speed************ */}
-                                {/*********************************/}
-
-                                <div className="speed-label">
-                                    <label>Speed</label>
-                                </div>
-                                <div id="speed">
-                                    {/*******************************************/}
-                                    {/******** input speed**************/}
-                                    {/*******************************************/}
-                                    <div id="speed-input">
-                                        <input
-                                            name="speed"
-                                            type="Text"
-                                            required
-                                            onChange={this.handleInput}
-                                        ></input>
-                                    </div>
+                                {/*******************************************/}
+                                {/******** input speed**************/}
+                                {/*******************************************/}
+                                <div id="speed-input">
+                                    <input
+                                        name="speed"
+                                        type="Text"
+                                        required
+                                        onChange={this.handleInput}
+                                    ></input>
                                 </div>
                             </div>
+                        </div>
 
-                            {/*-----------------------------------*/}
-                            {/*------------  height   ------------ */}
-                            {/*------------------------------------*/}
+                        {/*-----------------------------------*/}
+                        {/*------------  height   ------------ */}
+                        {/*------------------------------------*/}
+                        <div id="height">
+                            {/********************************/}
+                            {/******** label height************ */}
+                            {/*********************************/}
+
+                            <div className="height-label">
+                                <label>Height</label>
+                            </div>
                             <div id="height">
-                                {/********************************/}
-                                {/******** label height************ */}
-                                {/*********************************/}
-
-                                <div className="height-label">
-                                    <label>Height</label>
-                                </div>
-                                <div id="height">
-                                    {/*******************************************/}
-                                    {/******** input height**************/}
-                                    {/*******************************************/}
-                                    <div id="height-input">
-                                        <input
-                                            name="height"
-                                            type="Text"
-                                            required
-                                            onChange={this.handleInput}
-                                        ></input>
-                                    </div>
+                                {/*******************************************/}
+                                {/******** input height**************/}
+                                {/*******************************************/}
+                                <div id="height-input">
+                                    <input
+                                        name="height"
+                                        type="Text"
+                                        required
+                                        onChange={this.handleInput}
+                                    ></input>
                                 </div>
                             </div>
+                        </div>
 
-                            {/*-----------------------------------*/}
-                            {/*------------  weight   ------------ */}
-                            {/*------------------------------------*/}
+                        {/*-----------------------------------*/}
+                        {/*------------  weight   ------------ */}
+                        {/*------------------------------------*/}
+                        <div id="weight">
+                            {/********************************/}
+                            {/******** label weight************ */}
+                            {/*********************************/}
+
+                            <div className="weight-label">
+                                <label>Weight</label>
+                            </div>
                             <div id="weight">
-                                {/********************************/}
-                                {/******** label weight************ */}
-                                {/*********************************/}
-
-                                <div className="weight-label">
-                                    <label>Weight</label>
-                                </div>
-                                <div id="weight">
-                                    {/*******************************************/}
-                                    {/******** input weight**************/}
-                                    {/*******************************************/}
-                                    <div id="weight-input">
-                                        <input
-                                            name="weight"
-                                            type="Text"
-                                            required
-                                            onChange={this.handleInput}
-                                        ></input>
-                                    </div>
+                                {/*******************************************/}
+                                {/******** input weight**************/}
+                                {/*******************************************/}
+                                <div id="weight-input">
+                                    <input
+                                        name="weight"
+                                        type="Text"
+                                        required
+                                        onChange={this.handleInput}
+                                    ></input>
                                 </div>
                             </div>
                         </div>
                     </div>
+
 
 
 
@@ -355,7 +356,7 @@ class Formulario extends React.Component {
                                             value={this.state.postVal}
                                             onChange={this.handleChange}
                                         ></textarea>
-                                        <div>
+                                        <div id="botones">
                                             <input
                                                 type="submit"
                                                 className="button"
@@ -380,7 +381,9 @@ class Formulario extends React.Component {
                     <div id="button-checkout">
                         <button
                             disabled={this.estadoActual}
-                            id="button-form"
+
+                            className="button"
+
                             type="submit">
                             Checkout
                         </button>
