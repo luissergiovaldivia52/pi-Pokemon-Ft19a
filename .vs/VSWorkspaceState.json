@@ -1,17 +1,16 @@
 {
   "ExpandedNodes": [
     "",
-    "\\api",
-    "\\api\\src",
-    "\\api\\src\\models",
     "\\client",
     "\\client\\src",
     "\\client\\src\\components",
-    "\\client\\src\\components\\Formulario",
+    "\\client\\src\\components\\Card",
+    "\\client\\src\\components\\Inicio",
+    "\\client\\src\\components\\NavBar",
     "\\client\\src\\folderRedux",
     "\\client\\src\\folderRedux\\actions",
     "\\client\\src\\folderRedux\\reducers"
   ],
-  "SelectedNode": "\\client\\src\\components\\Formulario\\Formulario.js",
+  "SelectedNode": "\\client\\src\\components\\Formulario\\Formulario.css",
   "PreviewInSolutionExplorer": false
 }

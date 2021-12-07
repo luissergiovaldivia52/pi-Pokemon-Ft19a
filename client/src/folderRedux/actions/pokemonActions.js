@@ -4,6 +4,7 @@ export const GET_ALL_TYPE = "GET_ALL_TYPE";
 export const SET_NAME = "SET_NAME";
 export const SET_ORDER = "SET_ORDER";
 export const SET_FILTER = "SET_FILTER";
+export const SET_FILTER_ORDER = "SET_FILTER_ORDERS";
 export const SET_PAGE = "SET_PAGE";
 export const GET_POKEMON = "GET_POKEMON";
 export const CREATE_POKEMON = "CREATE_POKEMON";
@@ -104,6 +105,8 @@ export const setFilter = (pokemons, filter) => {
         }
     }
 
+
+
     return {
         type: SET_FILTER,
         payload: {
@@ -112,6 +115,16 @@ export const setFilter = (pokemons, filter) => {
         },
     };
 };
+
+
+export const setFilterOrder = (filter) => {
+    //console.log("setOrder " + order)
+    return {
+        type: SET_FILTER_ORDER,
+        payload: filter
+    }
+}
+
 
 export const statusFilter = (status) => {
     return {
