@@ -94,18 +94,6 @@ async function getPokemon(req, res, next) {
             let resultApi = !dataBase && ((!api && Ambas) || (api && !Ambas))
             let resultDB = !api && ((!dataBase && Ambas) || (dataBase && !Ambas))
 
-            if (resultApi) {
-                console.log("Filtrado por api")
-
-            } else if (resultDB) {
-                console.log("Filtrado por db")
-
-            } else {
-                console.log("Ambas estan")
-
-            }
-
-
 
 
             apiPokemon = await axios.get(`https://pokeapi.co/api/v2/pokemon`);
@@ -146,7 +134,11 @@ async function getPokemon(req, res, next) {
                 })
             );
 
-            allPokemons = allPokemons.concat(dbPokemon);
+            resultApi ? allPokemons = allPokemons : resultDB ? allPokemons = dbPokemon : allPokemons = allPokemons.concat(dbPokemon)
+
+
+
+            // allPokemons = allPokemons.concat(dbPokemon);
 
             //#endregion
 
