@@ -13,104 +13,108 @@ import "./Inicio/inicio.css";
 // Altura y peso
 
 class Detalle extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
+    constructor(props) {
+        super(props);
+        this.state = {
+        };
+    }
 
-  componentDidMount() {
-    //const { match: { params } } = this.props;
-  
-    let urlElements = window.location.href.split("/");
+    componentDidMount() {
+        //const { match: { params } } = this.props;
 
-   
-    let urlElelement = urlElements[4];
+        let urlElements = window.location.href.split("/");
 
-    
 
-    //let id =params.id ;
-    let id = urlElelement;
-    this.props.getPokemon(id);
-  }
+        let urlElelement = urlElements[4];
 
-  render() {
-  
-    return (
-      <div>
-        <div id="detalle">
-          {this.props.pokemon?.length >= 0 && (
+
+
+        //let id =params.id ;
+        let id = urlElelement;
+        console.log("llama al action getPokemon")
+        this.props.getPokemon(id);
+    }
+
+    //console.log("Estamos en detalle")
+
+    render() {
+        // this.props.getPokemon(11)
+        return (
             <div>
-              <div>
-                <p>imagen del Pokemon</p>
-                <img
-                  src={this.props.pokemon[0].imagen}
-                  alt={this.props.pokemon[0].name}
-                />
-              </div>
+                <div id="detalle">
+                    {this.props.pokemon?.length > 0 && (
+                        <div>
+                            <div>
+                                <p>imagen del Pokemon</p>
+                                <img
+                                    src={this.props.pokemon[0].imagen}
+                                    alt={this.props.pokemon[0].name}
+                                />
+                            </div>
 
-              <div>
-                <p> nombre: {this.props.pokemon[0].name} </p>
-              </div>
+                            <div>
+                                <p> nombre: {this.props.pokemon[0].name} </p>
+                            </div>
 
-              
 
-              <div>
-                <p>Id del Pokemon: {this.props.pokemon[0].id}</p>
-              </div>
-              <div>
-                <p>Height : {this.props.pokemon[0].height}</p>
-              </div>
-              <div>
-                <p>Weight: {this.props.pokemon[0].weight}</p>
-              </div>
 
-              <div>
-                <p>Life: {this.props.pokemon[0].hp} </p>
-              </div>
+                            <div>
+                                <p>Id del Pokemon: {this.props.pokemon[0].id}</p>
+                            </div>
+                            <div>
+                                <p>Height : {this.props.pokemon[0].height}</p>
+                            </div>
+                            <div>
+                                <p>Weight: {this.props.pokemon[0].weight}</p>
+                            </div>
 
-              <div>
-                <p>Fuerza: {this.props.pokemon[0].hp}</p>
-              </div>
+                            <div>
+                                <p>Life: {this.props.pokemon[0].hp} </p>
+                            </div>
 
-              <div>
-                <p> Defense: {this.props.pokemon[0].defense}  </p>
-              </div>
+                            <div>
+                                <p>Fuerza: {this.props.pokemon[0].hp}</p>
+                            </div>
 
-              <div>
-                <p>Speed {this.props.pokemon[0].speed} </p>
-              </div>
+                            <div>
+                                <p> Defense: {this.props.pokemon[0].defense}  </p>
+                            </div>
 
-              <div>
-                <p>Type: </p>
+                            <div>
+                                <p>Speed {this.props.pokemon[0].speed} </p>
+                            </div>
 
-                <ul className="activity">
-                  {this.props.pokemon[0].type.map((e) => (
-                    <li>
-                      <div className="divActivity">
-                        <p>{e.name} </p>
-                      </div>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+                            <div>
+                                <p>Type: </p>
+
+                                <ul className="activity">
+                                    {this.props.pokemon[0].type.map((e) => (
+                                        <li>
+                                            <div className="divActivity">
+                                                <p>{e.name} </p>
+                                            </div>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        </div>
+                    )}
+                </div>
             </div>
-          )}
-        </div>
-      </div>
-    );
-  }
+        );
+    }
 }
 
 function mapStateToProps(state) {
-  return {
-    pokemon: state.pokemon,
-  };
+    return {
+        pokemon: state.pokemon,
+    };
 }
 
 function mapDispatchToProps(dispatch) {
-  return {
-    getPokemon: (id) => dispatch(getPokemon(id)),
-  };
+    return {
+        getPokemon: (id) => dispatch(getPokemon(id)),
+    };
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Detalle);

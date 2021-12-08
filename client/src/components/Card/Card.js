@@ -4,25 +4,25 @@ import { NavLink } from "react-router-dom";
 import "./Card.css";
 
 const Card = ({ image, name, id, continents }) => {
- 
-  return (
-    <div className = "box">
-       
-        <img src={image} alt={name} />
-        
-      
- 
-        
-          
+
+    return (
+        <div className="box">
+
+            <img src={image} alt={name} />
+
+
+
+
+
             <p>{continents}</p>
-          
 
- 
 
-      <NavLink to={`/pokemons/${id}`}>{name}</NavLink>
-      <p>{id}</p>
-    </div>
-  );
+
+
+            <NavLink to={`/pokemons/${id}`}>{name}</NavLink>
+            <p>{id}</p>
+        </div>
+    );
 };
 
 export default Card;

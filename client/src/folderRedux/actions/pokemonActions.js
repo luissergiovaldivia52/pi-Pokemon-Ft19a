@@ -16,6 +16,7 @@ export const FILTER_STATUS = "FILTER_STATUS";
 export const getPokemon = (id) => {
     return async (dispatch) => {
         try {
+            console.log("este es el get")
             const result = await axios.get(`http://localhost:3001/pokemons/${id}`);
             return dispatch({
                 type: GET_POKEMON,
