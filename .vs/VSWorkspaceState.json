@@ -4,13 +4,14 @@
     "\\api",
     "\\api\\src",
     "\\api\\src\\Controller",
+    "\\client",
+    "\\client\\src",
     "\\client\\src\\components",
-    "\\client\\src\\components\\Inicio",
-    "\\client\\src\\components\\NavBar",
+    "\\client\\src\\components\\Card",
+    "\\client\\src\\components\\Formulario",
     "\\client\\src\\folderRedux",
-    "\\client\\src\\folderRedux\\actions",
     "\\client\\src\\folderRedux\\reducers"
   ],
-  "SelectedNode": "\\api\\src\\Controller\\pokemonController.js",
+  "SelectedNode": "\\client\\src\\components\\Formulario\\Formulario.js",
   "PreviewInSolutionExplorer": false
 }
