@@ -35,8 +35,7 @@ class Formulario extends React.Component {
   }
 
   appendData(input) {
-    
-    this.submitName = true
+    this.submitName = true;
     this.displayData.push(
       <div id="display-data">
         <pre>{this.state.postVal}</pre>
@@ -48,7 +47,6 @@ class Formulario extends React.Component {
       type: this.allType,
       postVal: "",
     });
-    
   }
 
   prependData(input) {
@@ -64,7 +62,6 @@ class Formulario extends React.Component {
       type: this.allType,
       postVal: "",
     });
-    
   }
 
   handleChange(e) {
@@ -76,14 +73,13 @@ class Formulario extends React.Component {
 
   handleInput = (e) => {
     this.setState({ [e.target.name]: e.target.value });
-  
   };
   subCreatePokemon = (e) => {
     e.preventDefault();
-   
+
     if (this.submitName) {
       this.submitName = false;
-     
+
       return;
     }
     let array = this.state.type;
@@ -99,7 +95,7 @@ class Formulario extends React.Component {
 
     for (let i = 0; i < array.length; i++) {
       pokemon.types = this.state.type.shift();
-     
+
       this.props.createPokemon(pokemon);
     }
 
