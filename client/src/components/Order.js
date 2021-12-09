@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import {
   getPokemons,
   setOrder,
-  setFilter,
+
 } from "../folderRedux/actions/pokemonActions";
 
 class Order extends Component {

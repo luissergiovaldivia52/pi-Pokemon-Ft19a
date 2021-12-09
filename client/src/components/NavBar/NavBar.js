@@ -1,6 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import Search from "../Search";
+
 import Logo from "../../logoHenry.png";
 
 import "./NavBar.css";

@@ -8,7 +8,7 @@ import {
     setPage,
     setName,
     setOrder,
-    setFilter,
+  
 
 } from "../folderRedux/actions/pokemonActions";
 import Order from "./Order";
@@ -97,7 +97,7 @@ class Home extends React.Component {
                         next
                     </button>
 
-                    {this.props.pokemons?.result?.length >= 0 && (!this.props.pokemon?.length != 0
+                    {this.props.pokemons?.result?.length >= 0 && (!this.props.pokemon?.length !== 0
                         && this.props.pokemons.result.map((e) => {
                             return <Card image={e.imagen} name={e.name} id={e.id} />;
                         })
