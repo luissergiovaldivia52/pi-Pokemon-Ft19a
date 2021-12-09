@@ -64,7 +64,7 @@ class Home extends React.Component {
 
 
         return (
-   
+
             < div >
 
 
@@ -89,7 +89,7 @@ class Home extends React.Component {
                     </button>
                     <label>{this.props.page}</label>
                     <button
-                        disabled={this.props.pokemons?.count <= this.props.page * 4}
+                        disabled={this.props.pokemons?.count <= 8}
                         onClick={() => {
                             this.changePage(this.props.page + 1);
                         }}
@@ -139,3 +139,5 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);
+
+//disabled = { this.props.pokemons?.count <= this.props.page * 5 }

@@ -46,8 +46,8 @@ async function getPokemon(req, res, next) {
 
         if (name && name !== "") {
             /************************************************************************/
-            /******Aca busca por nombre                                   ***********/
-            /******                                                       ***********/
+            /******Aca busca por nombre ***********/
+            /****** ***********/
             /*************************************************************************/
 
 
@@ -109,7 +109,7 @@ async function getPokemon(req, res, next) {
 
             dbPokemon = await Pokemon.findAll({ include: Type });
             let aux = [];
-
+            console.log("este es el dbPokemon " + dbPokemon)
             await Promise.all(
                 await apiPokemon.map(async (e) => {
                     let obj = new Object();
@@ -171,14 +171,6 @@ async function getPokemon(req, res, next) {
 
                 })
             }
-
-
-
-
-
-
-
-
 
 
         }
@@ -322,6 +314,12 @@ async function getPokemonById(req, res, next) {
                 },
             },
         });
+
+        //dbPokemon = await Pokemon.findOne({
+        //    where: {
+        //        id: `{id}`
+        //    },
+        //});
 
         allPokemons = allPokemons.concat(dbPokemon);
 
